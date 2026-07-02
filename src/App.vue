@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>Hello Vue</div>
+  <router-view></router-view>
 </template>
 
 <style scoped></style>
