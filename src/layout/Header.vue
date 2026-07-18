@@ -57,6 +57,7 @@ defineOptions({
   display: flex;
   align-items: center;
   cursor: pointer;
+  outline: none;
 }
 .username {
   margin-left: 10px;
