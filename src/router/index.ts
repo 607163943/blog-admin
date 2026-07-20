@@ -10,9 +10,19 @@ const router = createRouter({
       component: Layout,
       children: [
         {
+          path: 'article',
+          name: 'Article',
+          component: () => import('@/views/article/index.vue')
+        },
+        {
           path: 'category',
           name: 'Category',
           component: () => import('@/views/category/index.vue')
+        },
+        {
+          path: 'tag',
+          name: 'Tag',
+          component: () => import('@/views/tag/index.vue')
         }
       ]
     }

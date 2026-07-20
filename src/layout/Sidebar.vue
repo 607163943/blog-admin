@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { DataAnalysis, Document, Folder, Collection } from '@element-plus/icons-vue'
 import { useLayoutStore } from '@/stores/modules/layout'
 
@@ -7,7 +8,8 @@ defineOptions({
   name: 'LayoutSidebar'
 })
 const layoutStore = useLayoutStore()
-const activeMenu = ref('/dashboard')
+const route = useRoute()
+const activeMenu = computed(() => route.path)
 </script>
 
 <template>
