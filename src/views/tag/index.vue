@@ -5,7 +5,8 @@ import {
   getTagList,
   addTag,
   updateTag,
-  deleteTag
+  deleteTag,
+  getTagById
 } from '@/api/tag'
 import type { TagVO, TagQuery } from '@/types/tag'
 import { Search, Refresh, Plus, Edit, Delete } from '@element-plus/icons-vue'
@@ -88,13 +89,22 @@ const handleAdd = () => {
 }
 
 // 修改
-const handleEdit = (row: TagVO) => {
+const handleEdit = async (row: TagVO) => {
   dialogTitle.value = '修改标签'
-  formData.id = row.id
-  formData.tagName = row.tagName
   dialogVisible.value = true
   if (formRef.value) {
     formRef.value.clearValidate()
+  }
+  try {
+    const res = await getTagById(row.id)
+    if (res.data.code === 200) {
+      formData.id = res.data.data.id
+      formData.tagName = res.data.data.tagName
+    } else {
+      ElMessage.error(res.data.msg || '获取标签详情失败')
+    }
+  } catch (error) {
+    console.error(error)
   }
 }
 

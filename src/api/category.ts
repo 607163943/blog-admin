@@ -41,3 +41,10 @@ export function deleteCategory(ids: number[]) {
 export function getAllCategories() {
   return request.get<Result<CategoryVO[]>>('/category/all')
 }
+
+/**
+ * 根据ID获取分类数据
+ */
+export function getCategoryById(id: number) {
+  return request.get<Result<CategoryVO>>(`/category/${id}`)
+}

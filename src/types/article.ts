@@ -21,3 +21,28 @@ export interface ArticleStatusUpdateDTO {
   id: number
   articleStatus: number
 }
+
+export interface ArticleSaveDTO {
+  articleContent: string
+  articleCover?: string
+  articleStatus: number
+  articleSummary?: string
+  articleTitle: string
+  categoryId: number
+  tagIds?: number[]
+}
+
+export interface ArticleUpdateDTO extends ArticleSaveDTO {
+  id: number
+}
+
+export interface ArticleDetailVO {
+  id: number
+  articleTitle: string
+  categoryId: number
+  articleSummary: string
+  articleContent: string
+  articleCover: string
+  tagIds: number[]
+  articleStatus: number // [0]草稿 [1]发布
+}

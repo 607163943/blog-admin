@@ -8,6 +8,7 @@ import { getAllTags } from '@/api/tag'
 import type { ArticleVO, ArticleQuery } from '@/types/article'
 import type { CategoryVO } from '@/types/category'
 import type { TagVO } from '@/types/tag'
+import { useRouter } from 'vue-router'
 
 defineOptions({
   name: 'ArticleManagement'
@@ -22,6 +23,8 @@ const queryParams = ref<ArticleQuery>({
   tagId: '',
   articleStatus: ''
 })
+
+const router = useRouter()
 
 // 数据状态
 const loading = ref(false)
@@ -89,13 +92,18 @@ const handleSelectionChange = (selection: ArticleVO[]) => {
   selectedIds.value = selection.map((item) => item.id)
 }
 
-// 新增、修改 (暂未实现)
+// 新增、修改
 const handleAdd = () => {
-  ElMessage.info('新增文章功能暂未实现')
+  router.push('/article/edit')
 }
 
 const handleEdit = (row?: ArticleVO) => {
-  ElMessage.info('修改文章功能暂未实现')
+  const id = row ? row.id : selectedIds.value[0]
+  if (!id) {
+    ElMessage.warning('请选择要修改的文章')
+    return
+  }
+  router.push(`/article/edit/${id}`)
 }
 
 // 删除文章

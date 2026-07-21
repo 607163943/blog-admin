@@ -6,9 +6,9 @@ import {
   addCategory,
   updateCategory,
   deleteCategory,
-  type CategoryVO,
-  type CategoryQuery
+  getCategoryById
 } from '@/api/category'
+import type { CategoryVO, CategoryQuery } from '@/types/category'
 import { Search, Refresh, Plus, Edit, Delete } from '@element-plus/icons-vue'
 
 // 查询参数
@@ -89,13 +89,22 @@ const handleAdd = () => {
 }
 
 // 修改
-const handleEdit = (row: CategoryVO) => {
+const handleEdit = async (row: CategoryVO) => {
   dialogTitle.value = '修改分类'
-  formData.id = row.id
-  formData.categoryName = row.categoryName
   dialogVisible.value = true
   if (formRef.value) {
     formRef.value.clearValidate()
+  }
+  try {
+    const res = await getCategoryById(row.id)
+    if (res.data.code === 200) {
+      formData.id = res.data.data.id
+      formData.categoryName = res.data.data.categoryName
+    } else {
+      ElMessage.error(res.data.msg || '获取分类详情失败')
+    }
+  } catch (error) {
+    console.error(error)
   }
 }
 

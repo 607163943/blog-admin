@@ -40,3 +40,10 @@ export function deleteTag(ids: number[]) {
 export function getAllTags() {
   return request.get<Result<TagVO[]>>('/tag/all')
 }
+
+/**
+ * 根据ID获取标签数据
+ */
+export function getTagById(id: number) {
+  return request.get<Result<TagVO>>(`/tag/${id}`)
+}
