@@ -8,7 +8,13 @@ const router = createRouter({
       path: '/',
       name: 'Layout',
       component: Layout,
+      redirect: '/dashboard',
       children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          component: () => import('@/views/dashboard/index.vue')
+        },
         {
           path: 'article',
           name: 'Article',
